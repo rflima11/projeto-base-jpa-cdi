@@ -7,13 +7,18 @@ import javax.enterprise.inject.se.SeContainer;
 import javax.enterprise.inject.se.SeContainerInitializer;
 import javax.inject.Inject;
 
+import com.stefanini.model.Endereco;
 import com.stefanini.model.Pessoa;
+import com.stefanini.servico.EnderecoServico;
 import com.stefanini.servico.PessoaServico;
 
 public class App {
 
 	@Inject
 	private PessoaServico servico;
+	
+	@Inject
+	private EnderecoServico servicoEndereco;
 
 	public static void main(String[] args) {
 		// CONFIGURACAO PARA INICIAR O CONTAINER PARA GERENCIAMENTO DO CDI
@@ -25,7 +30,7 @@ public class App {
 	}
 
 	public void executar() {
-		buscarTodos();
+		salvar();
 //		encontrar();
 //		salvar();
 //		remover();
@@ -57,10 +62,13 @@ public class App {
 
 	public void salvar() {
 
-//		Pessoa pessoa = new Pessoa("JOAO", LocalDate.of(1995, 8, 24));
-//		pessoa.setEmail("joaom.dev@hotmail.com");
-//		servico.salvar(pessoa);
-
+		//Pessoa pessoa = new Pessoa("JOAO", "joaom.dev@hotmail.com.br22", LocalDate.of(1995, 8, 24), Boolean.FALSE);
+		Pessoa pessoa2 = new Pessoa("Abacatão", "abacate@gmail.com.brt86", LocalDate.of(1994, 3, 26), Boolean.TRUE);
+		//servico.salvar(pessoa);
+		servico.salvar(pessoa2);
+		Endereco endereco2 = new Endereco("ÁGUAS CLARAS", "Próximo a uma distribuidora", "Arniqueiras", "Brasília", "DF", "12345678", pessoa2);
+	//	Endereco endereco1 = new Endereco("QNL 10 BLOCO G", "Próximo ao mercado", "Taguatinga Norte", "Brasília", "DF", "12345678", pessoa);
+		servicoEndereco.salvar(endereco2);
 	}
 
 }
