@@ -3,11 +3,15 @@ package com.stefanini.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -56,6 +60,13 @@ public class Pessoa implements Serializable{
 	@NotNull
 	@Column(name = "ST_PESSOA")
 	private Boolean situacao;
+	
+	@NotNull
+	@OneToOne(cascade=CascadeType.ALL)
+    @JoinTable(name="TB_PESSOA_PERFIL",
+              joinColumns={@JoinColumn(name="CO_SEQ_PESSOA")},  
+              inverseJoinColumns={@JoinColumn(name="CO_SEQ_PERFIL")}) 
+	private Perfil perfil;
 
 	/**
 	 * Metodo construtor da classe
@@ -153,6 +164,12 @@ public class Pessoa implements Serializable{
 	public String toString() {
 		return "Pessoa [id=" + id + ", nome=" + nome + ", email=" + email + ", dataNascimento=" + dataNascimento
 				+ ", situacao=" + situacao + "]";
+	}
+
+
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 	
 	

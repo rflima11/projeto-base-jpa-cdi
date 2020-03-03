@@ -1,19 +1,23 @@
 package com.stefanini.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="TB_ENDERECO")
-public class Endereco {
+public class Endereco implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="CO_SEQ_ENDERECO")
@@ -38,7 +42,7 @@ public class Endereco {
 	private String cep;
 	
 	@NotNull
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="CO_SEQ_PESSOA")
 	private Pessoa pessoa;
 	
