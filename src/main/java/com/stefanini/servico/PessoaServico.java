@@ -2,12 +2,15 @@ package com.stefanini.servico;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
 import com.stefanini.dao.PessoaDao;
+import com.stefanini.dto.PessoaDto;
 import com.stefanini.model.Pessoa;
+import com.stefanini.parser.PessoaParaPessoaDto;
 import com.stefanini.util.IGenericService;
 
 /**
@@ -20,6 +23,9 @@ public class PessoaServico implements IGenericService<Pessoa, Long> {
 	
 	@Inject
 	private PessoaDao dao;
+	
+	@Inject
+	private PessoaParaPessoaDto dto;
 	
 	
 	/**

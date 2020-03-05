@@ -22,26 +22,25 @@ public class PerfilServico implements IGenericService<Perfil, Long> {
 
 	@Override
 	public Perfil atualizar(@Valid Perfil entity) {
-		// TODO Auto-generated method stub
+		perfilDao.atualizar(entity);
 		return null;
 	}
 
 	@Override
 	public void remover(Long id) {
-		// TODO Auto-generated method stub
+		perfilDao.remover(id);
 		
 	}
 
 	@Override
 	public Optional<List<Perfil>> getList() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return perfilDao.getList();
 	}
 
 	@Override
 	public Optional<Perfil> encontrar(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return perfilDao.encontrar(id);
 	}
 
 }
