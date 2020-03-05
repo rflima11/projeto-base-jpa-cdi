@@ -3,14 +3,18 @@ package com.stefanini.teste;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.enterprise.inject.se.SeContainer;
 import javax.enterprise.inject.se.SeContainerInitializer;
 import javax.inject.Inject;
 
+import com.stefanini.dto.PessoaDto;
 import com.stefanini.model.Endereco;
 import com.stefanini.model.Perfil;
 import com.stefanini.model.Pessoa;
+import com.stefanini.parser.PessoaDtoParaPessoa;
+import com.stefanini.parser.PessoaParaPessoaDto;
 import com.stefanini.servico.EnderecoServico;
 import com.stefanini.servico.PessoaServico;
 
@@ -21,6 +25,11 @@ public class App {
 	
 	@Inject
 	private EnderecoServico enderecoServico;
+	
+	@Inject
+	private PessoaDtoParaPessoa toENTITY;
+	@Inject
+	private PessoaParaPessoaDto toDTO;
 	
 
 	public static void main(String[] args) {
@@ -34,9 +43,10 @@ public class App {
 
 	public void executar() {
 //		buscarTodos();
-		encontrar();
+//		encontrar();
 //		salvar();
 //		remover();
+		testaDto(3L);
 	}
 	
 	
@@ -44,14 +54,17 @@ public class App {
 		servico.remover(5L);
 	}
 
-	private void encontrar() {
-		Optional<Pessoa> pessoa = servico.encontrar(1L);
+	private Optional<Pessoa> encontrar(Long id) {
+		Optional<Pessoa> pessoa = servico.encontrar(id);
 		if (pessoa.isPresent()) {
-			System.out.println("Pessoa encontrada");
-			System.out.println(pessoa.get());
+			//System.out.println("Pessoa encontrada");
+			//System.out.println(pessoa.get());
+			
 		} else {
 			System.out.println("Pessoa não encontrada");
+		
 		}
+		return pessoa;
 	}
 
 	private void buscarTodos() {
@@ -61,6 +74,11 @@ public class App {
 			});
 		});
 //		System.out.println();
+	}
+	
+	private void testaDto(Long id) {
+		System.out.println("Conversão feita com sucesso!");
+		System.out.println((toDTO.apply(encontrar(id))).getNome());
 	}
 
 	public void salvar() {
