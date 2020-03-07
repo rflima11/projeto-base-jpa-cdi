@@ -9,6 +9,7 @@ import javax.enterprise.inject.se.SeContainer;
 import javax.enterprise.inject.se.SeContainerInitializer;
 import javax.inject.Inject;
 
+import com.stefanini.dao.PessoaDao;
 import com.stefanini.dto.PessoaDto;
 import com.stefanini.model.Endereco;
 import com.stefanini.model.Perfil;
@@ -27,10 +28,10 @@ public class App {
 	private EnderecoServico enderecoServico;
 	
 	@Inject
-	private PessoaDtoParaPessoa toENTITY;
-	@Inject
 	private PessoaParaPessoaDto toDTO;
 	
+	@Inject
+	private PessoaDao dao;
 
 	public static void main(String[] args) {
 		// CONFIGURACAO PARA INICIAR O CONTAINER PARA GERENCIAMENTO DO CDI
@@ -46,7 +47,8 @@ public class App {
 //		encontrar();
 //		salvar();
 //		remover();
-		testaDto(3L);
+//		testaDto(3L);
+		System.out.println(dao.getListaPorNome("abacatão"));
 	}
 	
 	

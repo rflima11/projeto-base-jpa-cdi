@@ -70,5 +70,9 @@ public class PessoaServico implements IGenericService<Pessoa, Long> {
 	public Optional<Pessoa> encontrar(Long id) {
 		return dao.encontrar(id);
 	}
+	
+	public Optional<Pessoa> encontrarPorNome(PessoaDto pessoa){
+		return dao.encontrar(pessoa.getId());
+	}
 
 }
